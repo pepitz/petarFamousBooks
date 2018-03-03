@@ -1,0 +1,113 @@
+<div class="container">
+  <div class="row">
+    <h1 class="col-12 col-md-12  text-center alert alert-primary">
+      Famous Books App
+    </h1>
+  </div>
+
+  <!-- Input search-box here -->
+
+  <div class="row">
+
+    <p-dialog [showHeader]="false" [(visible)]="isLoading" [responsive]="true" showEffect="fade" [modal]="true">
+      <section *ngIf="isLoading" class="row">
+        <div class="loader col-12">
+          <span class="loader-text">Loading data...</span>
+          <p-progressSpinner></p-progressSpinner>
+        </div>
+      </section>
+    </p-dialog>
+
+    <div class="search-panel ui-inputgroup col-xs-12 col-md-5 col-lg-5">
+      <input [(ngModel)]="bookTitle" class="col-11" type="text" pInputText placeholder="Search for book titles...">
+      <button (click)="search()" class="col-1 ui-button-secondary" pButton type="button" icon="fa-search"></button>
+    </div>
+
+  </div>
+
+  <!-- books-list here -->
+
+  <p-dataTable #dt *ngIf="arrDataTable.length > 0" [responsive]="true" [value]="arrDataTable" expandableRows="true" [rows]="10"
+    [paginator]="true" [rowsPerPageOptions]="[10,20,50]">
+
+    <p-column expander="true" [style]="{'width': '15%', 'text-align' : 'center'}" styleClass="col-icon">details</p-column>
+    <p-column field="cover" header="Cover" [style]="{'width': '10%'}" styleClass="col-cover">
+
+      <ng-template let-col let-book="rowData" pTemplate="body">
+        <img (click)="showCover(book)" [src]="book[col.field]">
+      </ng-template>
+
+    </p-column>
+    <p-column field="title" header="Title"></p-column>
+    <p-column field="author_name" header="Author"></p-column>
+    <p-column [hidden]="!isColHidden" field="isbn" header="ISBN"></p-column>
+    <p-column [hidden]="!isColHidden" field="first_publish" header="First Publish Year"></p-column>
+    <ng-template let-book pTemplate="rowexpansion">
+
+      <div class="container-fluid">
+        <div class="row book-details-wrapper">
+
+          <div class="col-1 col-md-1 text-center">
+            <img *ngIf="book.cover" (click)="showCover(book)" [src]="book.cover">
+          </div>
+
+          <div class="col-12 col-md-6">
+
+            <div class="row">
+              <div class="col-6 col-md-5">ISBN:</div>
+              <div class="col-6 col-md-7">{{book.isbn}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-6 col-md-5">First publish year:</div>
+              <div class="col-6 col-md-7">{{book.first_publish}}</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-dataTable>
+
+  <!-- Book Details Large Preview here -->
+
+  <p-dialog header="Book Details" [(visible)]="dialogVisible && imageBlob_url" [responsive]="true" showEffect="fade" [modal]="true"
+    [draggable]="true" width="600">
+    <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="selectedBook">
+
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-12" style="text-align:center;">
+          <img *ngIf="imageBlob_url" [src]="imageBlob_url">
+        </div>
+      </div>
+
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-4">
+          <label for="vin" class="label">Title</label>
+        </div>
+        <div class="ui-grid-col-8">{{selectedBook.title}}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-4">
+          <label for="brand" class="label">First Publish Year</label>
+        </div>
+        <div class="ui-grid-col-8">{{selectedBook.publish_year}}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-4">
+          <label for="brand" class="label">ISBN</label>
+        </div>
+        <div class="ui-grid-col-8">{{selectedBook.isbn}}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-4">
+          <label for="color" class="label">Author</label>
+        </div>
+        <div class="ui-grid-col-8">{{selectedBook.author_name}}</div>
+      </div>
+    </div>
+  </p-dialog>
+
+
+
+</div>

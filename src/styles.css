@@ -1,0 +1,122 @@
+
+.ui-dialog {
+    top:100px !important;
+}
+
+/********************/
+
+div.loader {
+    width:200px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.loader .ui-progress-spinner {
+    width:40px;
+    height:40px;
+}
+
+.loader-text {
+    width:100px;
+    height: 50px;
+    line-height: 50px;
+}
+
+/********************/
+
+img:hover {
+    cursor:pointer;
+}
+
+
+.search-panel {
+    margin-top:30px;
+    margin-bottom: 50px;
+}
+
+/********************/
+
+.col-cover {
+    text-align: center;
+}
+
+.cover-wrapper {
+    
+    line-height:128px;
+     text-align: center;
+}
+
+/********************/
+
+span.ui-row-toggler::before {
+    content: "details";
+    font-weight: normal;
+    font-family: Roboto;
+    font-size: 1em;
+    /* -webkit-font-smoothing: antialiased; */
+}
+td.col-icon a {
+    width: 80%;
+    height: 26px;
+    line-height: 24px;
+    background: black;
+    /* border: 1px solid black; */
+    border-radius: 7px;
+    text-transform: uppercase;
+}
+
+td.col-icon a span {
+    width:90%;
+    color: white !important;
+    font-size: 90%;
+}
+span.ui-row-toggler::after {
+    /* content: "\f05a"; */
+    padding-left: 5px;
+}
+
+@media screen and (max-width: 870px) {
+    td.col-icon a {
+        width:80%;
+        
+    }
+    td.col-icon a span {
+        width: 80%;
+        
+    }
+
+    td.col-icon a span::before {
+        content: "info";
+    } 
+}
+
+@media screen and (max-width: 560px){
+
+    .col-cover {
+        text-align: left;
+    }
+
+    td.col-icon {
+        text-align: left !important;
+    }
+
+    td.col-icon a {
+        position: relative;
+        float: left;
+        width: 100px;
+        height: 30px;
+        line-height: 30px;
+        left: 50%;
+        margin-left: -50px;
+        
+    }
+    td.col-icon a span {
+        width: 100px;
+        
+    }
+
+    td.col-icon a span::before {
+        content: "details";
+    }
+}
